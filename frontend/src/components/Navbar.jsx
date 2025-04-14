@@ -2,52 +2,22 @@ import React from 'react';
 import { FaUserCircle, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const Navbar = () => {
-  const styles = {
-    navbar: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: '15px 20px',
-      backgroundColor: '#1a1a1a',
-      color: 'white',
-    },
-    navLeft: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '15px',
-    },
-    navRight: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '20px',
-    },
-    iconButton: {
-      backgroundColor: '#121212',
-      border: 'none',
-      color: 'white',
-      fontSize: '18px',
-      padding: '8px',
-      borderRadius: '50%',
-      cursor: 'pointer',
-    },
-    searchInput: {
-      backgroundColor: '#333',
-      border: 'none',
-      padding: '8px 12px',
-      borderRadius: '20px',
-      color: 'white',
-      width: '250px',
-    },
-  };
-
   return (
-    <div style={styles.navbar}>
-      <div style={styles.navLeft}>
-        <button style={styles.iconButton}><FaChevronLeft /></button>
-        <button style={styles.iconButton}><FaChevronRight /></button>
+    <div className="flex items-center justify-between px-5 py-3 bg-gray-900 text-white">
+      <div className="flex items-center gap-4">
+        <button className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700">
+          <FaChevronLeft />
+        </button>
+        <button className="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-700">
+          <FaChevronRight />
+        </button>
       </div>
-      <div style={styles.navRight}>
-        <input type="text" placeholder="Search..." style={styles.searchInput} />
+      <div className="flex items-center gap-5">
+        <input
+          type="text"
+          placeholder="Search..."
+          className="bg-gray-700 text-white px-4 py-2 rounded-full w-64 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        />
         <FaUserCircle size={28} />
       </div>
     </div>

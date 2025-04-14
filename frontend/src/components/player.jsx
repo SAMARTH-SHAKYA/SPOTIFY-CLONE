@@ -2,58 +2,19 @@ import React from 'react';
 import { FaPlay, FaPause, FaStepForward, FaStepBackward } from 'react-icons/fa';
 
 const Player = () => {
-  const styles = {
-    player: {
-      position: 'fixed',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      height: '80px',
-      backgroundColor: '#181818',
-      color: 'white',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: '0 30px',
-      zIndex: 100,
-    },
-    songInfo: {
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    controls: {
-      display: 'flex',
-      gap: '20px',
-      alignItems: 'center',
-    },
-    progressBar: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      height: '4px',
-      backgroundColor: '#444',
-    },
-    progress: {
-      height: '100%',
-      width: '40%',
-      backgroundColor: '#1DB954',
-    },
-  };
-
   return (
-    <div style={styles.player}>
-      <div style={styles.songInfo}>
-        <strong>Track Name</strong>
-        <small>Artist Name</small>
+    <div className="fixed bottom-0 left-0 right-0 h-20 bg-gray-900 text-white flex items-center justify-between px-8 z-50">
+      <div className="flex flex-col">
+        <strong className="text-sm">Track Name</strong>
+        <small className="text-xs text-gray-400">Artist Name</small>
       </div>
-      <div style={styles.controls}>
-        <FaStepBackward />
-        <FaPlay />
-        <FaStepForward />
+      <div className="flex items-center gap-5">
+        <FaStepBackward className="cursor-pointer hover:text-gray-400" />
+        <FaPlay className="cursor-pointer hover:text-gray-400" />
+        <FaStepForward className="cursor-pointer hover:text-gray-400" />
       </div>
-      <div style={styles.progressBar}>
-        <div style={styles.progress}></div>
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-700">
+        <div className="h-full w-2/5 bg-green-500"></div>
       </div>
     </div>
   );
