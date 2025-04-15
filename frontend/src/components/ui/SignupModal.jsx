@@ -22,6 +22,11 @@ const SignupModal = ({ isOpen, onClose }) => {
           placeholder="Password"
           className="w-full mb-4 p-2 rounded bg-[#2a2a2a] text-white"
         />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          className="w-full mb-4 p-2 rounded bg-[#2a2a2a] text-white"
+        />
         <button className="w-full bg-green-500 py-2 rounded hover:bg-green-600 transition">
           Sign up
         </button>
