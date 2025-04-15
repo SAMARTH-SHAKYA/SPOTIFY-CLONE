@@ -5,6 +5,7 @@ import Player from '../components/Player';
 import SongCard from '../components/SongCard';
 import ArtistCard from '../components/ArtistCard';
 
+
 const songs = [
   {
     title: 'Pal Pal',
