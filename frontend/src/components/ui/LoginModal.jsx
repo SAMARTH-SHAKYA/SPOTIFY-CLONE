@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "sonner"
+import {LOGIN_ROUTE} from '../../constants.js'
+
 
 const LoginModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    if(!email){
+      toast("Email is requried.");
+      return;
+    }
+    if(!password){
+      toast("Password is requried.");
+      return;
+    }
+    try {
+      const response = await axios.post(LOGIN_ROUTE,{email,password});
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
@@ -11,16 +35,23 @@ const LoginModal = ({ isOpen, onClose }) => {
           type="email"
           placeholder="Email"
           className="w-full mb-3 p-2 rounded bg-[#2a2a2a] text-white"
+          onChange={(e)=>setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
           className="w-full mb-4 p-2 rounded bg-[#2a2a2a] text-white"
+          onChange={(e)=>setPassword(e.target.value)}
         />
-        <button className="w-full bg-green-500 py-2 rounded hover:bg-green-600 transition">
+        <button className="w-full bg-green-500 py-2 rounded hover:bg-green-600 transition"
+        onClick={handleLogin}
+        >
           Log in
         </button>
-        <button onClick={onClose} className="mt-4 text-gray-400 hover:underline">
+        <button
+          onClick={onClose}
+          className="mt-4 text-gray-400 hover:underline"
+        >
           Cancel
         </button>
       </div>

@@ -79,8 +79,6 @@ const Home = () => {
             ))}
           </div>
         </div>
-
-        <Player />
       </div>
     </div>
   );
