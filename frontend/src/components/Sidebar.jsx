@@ -1,31 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaSearch, FaBook } from 'react-icons/fa';
+
+import { FaHome, FaSearch, FaMusic } from 'react-icons/fa';
 
 const Sidebar = () => {
   return (
-    <div className="w-64 h-screen bg-black text-white p-5">
-      <h1 className="text-2xl font-bold mb-8">Spotify</h1>
-      <div className="flex flex-col gap-5">
-        <Link
-          to="/home"
-          className="flex items-center gap-3 text-lg text-white hover:text-gray-400"
-        >
+    <div className="w-64 h-screen bg-black text-white p-6 space-y-6">
+      <div className="text-2xl font-bold mb-8">🎵 Spotify Clone</div>
+
+      <nav className="flex flex-col space-y-4">
+        <Link to="/" className="flex items-center gap-3 hover:text-green-400">
           <FaHome /> Home
         </Link>
-        <Link
-          to="/search"
-          className="flex items-center gap-3 text-lg text-white hover:text-gray-400"
-        >
-          <FaSearch /> Search
+
+        <Link to="/playlist" className="flex items-center gap-3 hover:text-green-400">
+          <FaMusic /> Playlist
         </Link>
-        <Link
-          to="/library"
-          className="flex items-center gap-3 text-lg text-white hover:text-gray-400"
-        >
-          <FaBook /> Library
-        </Link>
-      </div>
+      </nav>
     </div>
   );
 };
