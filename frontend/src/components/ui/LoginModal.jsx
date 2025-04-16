@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { toast } from "sonner"
-import {LOGIN_ROUTE} from '../../constants.js'
-
+import { toast } from "sonner";
+import { LOGIN_ROUTE } from "../../constants.js";
 
 const LoginModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -11,21 +10,28 @@ const LoginModal = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    if(!email){
+    if (!email) {
       toast("Email is requried.");
       return;
     }
-    if(!password){
+    if (!password) {
       toast("Password is requried.");
       return;
     }
     try {
-      const response = await axios.post(LOGIN_ROUTE,{email,password});
+      const response = await axios.post(LOGIN_ROUTE, { email, password });
       console.log(response);
+      if (response.status == 200) {
+        toast.success("login successful!");
+        onClose();
+      } else {
+        toast.success("login Failed!");
+      }
     } catch (error) {
+      toast.success("login Failed!");
       console.log(error);
     }
-  }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
@@ -35,16 +41,17 @@ const LoginModal = ({ isOpen, onClose }) => {
           type="email"
           placeholder="Email"
           className="w-full mb-3 p-2 rounded bg-[#2a2a2a] text-white"
-          onChange={(e)=>setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
           className="w-full mb-4 p-2 rounded bg-[#2a2a2a] text-white"
-          onChange={(e)=>setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="w-full bg-green-500 py-2 rounded hover:bg-green-600 transition"
-        onClick={handleLogin}
+        <button
+          className="w-full bg-green-500 py-2 rounded hover:bg-green-600 transition"
+          onClick={handleLogin}
         >
           Log in
         </button>
