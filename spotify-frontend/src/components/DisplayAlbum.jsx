@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import Navbar from './Navbar'
-import { assets } from '../assets/assets.js';
+import { assets } from '../assets/frontend-assets/assets';
 import { PlayerContext } from '../context/PlayerContext';
 import { useContext, useEffect, useState } from 'react';
 

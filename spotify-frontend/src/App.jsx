@@ -4,7 +4,7 @@ import Player from './components/Player'
 import Sidebar from './components/Sidebar'
 import { PlayerContext } from './context/PlayerContext'
 
-const Apps = () => {
+const App = () => {
 
   const { audioRef, track, songsData } = useContext(PlayerContext);
 
@@ -24,4 +24,4 @@ const Apps = () => {
   )
 }
 
-export default Apps
+export default App

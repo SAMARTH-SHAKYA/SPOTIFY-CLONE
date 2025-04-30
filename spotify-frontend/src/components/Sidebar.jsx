@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { assets } from '../assets/assets.js';
+import { assets } from './../assets/frontend-assets/assets';
 
 function Sidebar() {
     const navigate = useNavigate();
