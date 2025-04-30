@@ -1,54 +1,28 @@
-import React, { useState } from 'react';
-import { FaHome, FaSearch } from 'react-icons/fa';
-import LoginModal from './ui/LoginModal';
-import SignupModal from './ui/SignupModal';
+import { useNavigate } from 'react-router-dom'
+import { assets } from '../assets/frontend-assets/assets'
 
-const Navbar = () => {
-  const [showLogin, setShowLogin] = useState(false);
-  const [showSignup, setShowSignup] = useState(false);
+function Navbar() {
+    const navigate = useNavigate();
+    return (
+        <>
+            <div className="w-full flex justify-between items-center font-semibold">
+                <div className="flex items-center gap-2">
+                    <img onClick={() => navigate(-1)} className='w-8 bg-black p-2 rounded-2xl cursor-pointer' src={assets.arrow_left} alt="arrow_left" />
+                    <img onClick={() => navigate(1)} className='w-8 bg-black p-2 rounded-2xl cursor-pointer' src={assets.arrow_right} alt="arrow_right" />
+                </div>
+                <div className="flex items-center gap-4">
+                    <p className='bg-white text-black text-[15px] px-4 py-1 rounded-2xl hidden md:block cursor-pointer'>Explore Premium</p>
+                    <p className='bg-black py-1 px-3 rounded-2xl text-[15px] cursor-pointer'>Install App</p>
+                    <p className='bg-sky-400 text-black w-7 h-7 rounded-full flex items-center justify-center'>N</p>
+                </div>
+            </div>
+            <div className="flex items-center gap-2 mt-4">
+                <p className='bg-white text-black px-4 py-1 rounded-2xl cursor-pointer'>All</p>
+                <p className='bg-black text-white px-4 py-1 rounded-2xl cursor-pointer'>Music</p>
+                <p className='bg-black text-white px-4 py-1 rounded-2xl cursor-pointer'>Podcasts</p>
+            </div>
+        </>
+    )
+}
 
-  return (
-    <>
-      <div className="flex items-center justify-between px-6 py-4 bg-[#121212] border-b border-gray-800">
-        <div className="flex items-center gap-4 text-white text-xl font-semibold">
-          <FaHome />
-          <span>Home</span>
-        </div>
-
-        <div className="flex-1 flex justify-center">
-          <div className="w-full max-w-xl relative">
-            <input
-              type="text"
-              placeholder="What do you want to play?"
-              className="w-full pl-10 pr-4 py-2 rounded-full bg-[#2a2a2a] text-white placeholder-gray-400 focus:outline-none"
-            />
-            <FaSearch className="absolute left-3 top-2.5 text-gray-400" />
-          </div>
-        </div>
-
-        <div className="text-white flex gap-4 items-center">
-          <button className="hover:underline">Premium</button>
-          <button className="hover:underline">Support</button>
-          <button className="hover:underline">Download</button>
-          <button
-            onClick={() => setShowLogin(true)}
-            className="bg-white text-black px-4 py-1 rounded-full font-semibold hover:scale-105 transition"
-          >
-            Log in
-          </button>
-          <button
-            onClick={() => setShowSignup(true)}
-            className="border px-4 py-1 rounded-full font-semibold border-white hover:scale-105 transition"
-          >
-            Sign up
-          </button>
-        </div>
-      </div>
-
-      <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} />
-      <SignupModal isOpen={showSignup} onClose={() => setShowSignup(false)} />
-    </>
-  );
-};
-
-export default Navbar;
+export default Navbar

@@ -1,70 +1,64 @@
-import React, { useRef, useState } from 'react';
-import { FaPlay, FaPause, FaForward, FaBackward, FaVolumeUp } from 'react-icons/fa';
+import { useContext } from 'react';
+import { assets } from './../assets/frontend-assets/assets';
+import { PlayerContext } from '../context/PlayerContext';
 
-const Player = () => {
-  const audioRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.5);
+function Player() {
 
-  const togglePlayPause = () => {
-    const audio = audioRef.current;
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play();
-    }
-    setIsPlaying(!isPlaying);
-  };
+    const { track, seekBar, seekBg, play, pause, playStatus, time, nextSong, previusSong,
+        seekSong, toggleLoop, isLooping, isShuffle, toggleShuffle, volume, handleVolumeChange,
+        isMuted, toggleMute } = useContext(PlayerContext)
 
-  const handleVolumeChange = (e) => {
-    const newVolume = e.target.value;
-    setVolume(newVolume);
-    audioRef.current.volume = newVolume;
-  };
+    return track ? (
+        <div className="h-[10%] bg-black flex justify-between items-center text-white px-4">
+            <div className="hidden lg:flex items-center gap-4">
+                <img className="w-12" src={track.image} alt="song img" />
+                <div>
+                    <p>{track.name}</p>
+                    <p>{track.desc.slice(0, 12)}</p>
+                </div>
+            </div>
+            <div className="flex flex-col items-center gap-1 m-auto">
+                <div className="flex gap-4">
+                    <img onClick={toggleShuffle} className={!isShuffle ? "w-4 cursor-pointer opacity-40" : "w-4 cursor-pointer"} src={assets.shuffle_icon} alt="shuffle_icon" />
+                    <img onClick={previusSong} className='w-4 cursor-pointer' src={assets.prev_icon} alt="prev_icon" />
+                    {!playStatus ? (
+                        <img onClick={play} className='w-4 cursor-pointer' src={assets.play_icon} alt="play_icon" />
+                    ) : (
+                        <img onClick={pause} className='w-4 cursor-pointer' src={assets.pause_icon} alt="pause_icon" />
+                    )}
+                    <img onClick={nextSong} className='w-4 cursor-pointer' src={assets.next_icon} alt="next_icon" />
 
-  return (
-    <div className="fixed bottom-0 left-0 right-0 backdrop-blur-md bg-black/60 text-white px-8 py-4 flex items-center justify-between border-t border-gray-700 z-50 shadow-xl">
-      {/* Controls */}
-      <div className="flex items-center gap-6 w-1/3">
-        <button className="hover:scale-110 transition duration-200 p-2 rounded-full hover:bg-gray-700">
-          <FaBackward />
-        </button>
+                    <img onClick={toggleLoop} className={isLooping ? "w-4 cursor-pointer" : "w-4 cursor-pointer opacity-40"} src={assets.loop_icon} alt="loop_icon" />
+                </div>
+                <div className="flex items-center gap-5">
+                    <p>{time.currentTime.minute}:{time.currentTime.second}</p>
+                    <div ref={seekBg} onClick={seekSong} className='w-[60vw] max-w-[500px] bg-gray-300 rounded-full cursor-pointer'>
+                        <hr ref={seekBar} className='h-1 border-none w-0 bg-green-800 rounded-full' />
+                    </div>
+                    <p>{time.totalTime.minute}:{time.totalTime.second}</p>
+                </div>
+            </div>
+            <div className="hidden lg:flex items-center gap-2 opacity-75">
+                <img className='w-4' src={assets.plays_icon} alt="plays_icon" />
+                <img className='w-4' src={assets.mic_icon} alt="mic_icon" />
+                <img className='w-4' src={assets.queue_icon} alt="queue_icon" />
+                <img className='w-4' src={assets.speaker_icon} alt="speaker_icon" />
+                <img onClick={toggleMute} className='w-4 cursor-pointer' src={!isMuted && volume !== 0 ? assets.volume_icon : assets.mute_icon} alt="volume_icon" />
+                <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={volume}
+                    onChange={handleVolumeChange}
+                    color='red'
+                    className="bg-gray-300 appearance-auto h-1 w-20 opacity-70 hover:opacity-100 rounded-lg"
+                />
+                <img className='w-4' src={assets.mini_player_icon} alt="mini_player_icon" />
+                <img className='w-4' src={assets.zoom_icon} alt="zoom_icon" />
+            </div>
+        </div>
+    ) : null
+}
 
-        <button
-          onClick={togglePlayPause}
-          className="text-2xl bg-green-500 hover:bg-green-400 text-black rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:scale-110 transition"
-        >
-          {isPlaying ? <FaPause /> : <FaPlay />}
-        </button>
-
-        <button className="hover:scale-110 transition duration-200 p-2 rounded-full hover:bg-gray-700">
-          <FaForward />
-        </button>
-      </div>
-
-      {/* Song Info */}
-      <div className="text-center w-1/3">
-        <audio ref={audioRef} className="hidden">
-          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3" />
-        </audio>
-        <p className="text-sm text-gray-300 font-medium tracking-wide">🎵 Song title — Artist</p>
-      </div>
-
-      {/* Volume */}
-      <div className="flex items-center gap-3 w-1/3 justify-end">
-        <FaVolumeUp />
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          value={volume}
-          onChange={handleVolumeChange}
-          className="w-28 accent-green-500 cursor-pointer"
-        />
-      </div>
-    </div>
-  );
-};
-
-export default Player;
+export default Player
