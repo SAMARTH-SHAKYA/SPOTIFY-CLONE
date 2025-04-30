@@ -13,7 +13,13 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+    likedSongs: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Song', 
+        }
+    ]
 });
 
 const User = mongoose.model('User', userSchema);
