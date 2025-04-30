@@ -5,7 +5,7 @@ import songRouter from "./routes/songRoute.js";
 import connectDB from "./config/mongodb.js";
 import connectCloudinary from "./config/cloudinary.js";
 import albumRouter from "./routes/albumRoute.js";
-
+import userRouter from "./Routes/userRoute.js"
 //app config
 const app = express();
 const port = process.env.PORT || 4000;
@@ -19,6 +19,7 @@ app.use(cors())
 //initializing routes
 app.use("/api/song", songRouter)
 app.use("/api/album", albumRouter)
+app.use("/api/user", userRouter)
 app.get('/', (req, res) => res.send("API Working"));
 
 

@@ -1,6 +1,6 @@
-import  bcrypt from "bcrypt";
-import { User }  from "../models/User/Usermodel.js";
-import  jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import { User } from "../models/User.js";
+import jwt from "jsonwebtoken";
 
 const maxAge = 24 * 60 * 60 * 1000;
 const createToken = (id, email, name) => {
@@ -15,7 +15,8 @@ const createToken = (id, email, name) => {
   );
   return token;
 };
-const userSignUp = async (req, res) => {
+
+export const userSignUp = async (req, res) => {
   try {
     console.log(req.body);
     const { username, email, password } = req.body;
@@ -55,14 +56,14 @@ const userSignUp = async (req, res) => {
   }
 };
 
-const userLogin = async (req, res) => {
+export const userLogin = async (req, res) => {
   try {
     console.log(req.body);
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).send("Email and password is required");
     }
-    const user = await User.findOne({email});
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).send("User not Found");
     }
@@ -85,5 +86,3 @@ const userLogin = async (req, res) => {
     return res.status(500).send("Something went wrong.");
   }
 };
-
-module.exports = { userLogin, userSignUp };
