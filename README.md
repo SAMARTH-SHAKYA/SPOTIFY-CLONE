@@ -7,28 +7,30 @@ A full-featured Spotify clone built to stream music, manage playlists, and mimic
 
 - User authentication (Login/Signup)
 - Browse songs, artists, albums
-- Create and manage playlists
+- Create and manage Albums
 - Search functionality
-- Music player with controls (Play, Pause, Next, Previous, Shuffle)
+- Music player with controls (Play, Pause, Next, Previous)
 - Responsive UI inspired by Spotify's official design
+- Chat Feature
+- Admin Dashboard
 
 ## 🛠️ Tech Stack
 
 ### Frontend
 - React.js
-- Tailwind CSS / Styled Components
+- Tailwind CSS / Styled Components/ shadCN 
 - React Router
 - Axios
 
 ### Backend
 - Node.js
 - Express.js
-- MongoDB / Firebase / PostgreSQL (choose what you used)
+- MongoDB /Cloudinary 
 - JWT for authentication
 
 ### Other Tools
-- Redux / Context API (for state management)
-- Cloudinary / Firebase Storage (for storing media files)
+- Local Storage/ Context API (for state management)
+- Cloudinary  (for storing media files)
 
 
 
